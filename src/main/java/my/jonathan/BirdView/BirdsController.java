@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 public class BirdsController {
 
     @Autowired
@@ -29,69 +30,11 @@ public class BirdsController {
     }
 
     @PostMapping("/api/v1/newBird")
-    public ResponseEntity<String> createBirdFromUserInput() {
-        Scanner scanner = new Scanner(System.in);
-
-        Birds bird = new Birds();
-
-        // Prompt the user to input values for each property of the bird object
-        System.out.print("Enter images: ");
-        bird.setImages(scanner.nextLine());
-
-        System.out.print("Enter breeding season: ");
-        bird.setBreedingSeason(scanner.nextLine());
-
-        System.out.print("Enter diet: ");
-        bird.setDiet(scanner.nextLine());
-
-        System.out.print("Enter countries found (separated by commas): ");
-        String countriesFoundInput = scanner.nextLine();
-        List<String> countriesFound = Arrays.asList(countriesFoundInput.split(","));
-        bird.setCountriesFound(countriesFound);
-
-        System.out.print("Enter distribution image: ");
-        bird.setDistributionImage(scanner.nextLine());
-
-        System.out.print("Enter distribution: ");
-        bird.setDistribution(scanner.nextLine());
-
-        System.out.print("Enter time most active (separated by commas): ");
-        String timeMostActiveInput = scanner.nextLine();
-        List<String> timeMostActive = Arrays.asList(timeMostActiveInput.split(","));
-        bird.setTimeMostActive(timeMostActive);
-
-        System.out.print("Enter order: ");
-        bird.setOrder(scanner.nextLine());
-
-        System.out.print("Enter family: ");
-        bird.setFamily(scanner.nextLine());
-
-        System.out.print("Enter wingspan: ");
-        bird.setWingspan(scanner.nextLine());
-
-        System.out.print("Enter height: ");
-        bird.setHeight(scanner.nextLine());
-
-        System.out.print("Enter weight: ");
-        bird.setWeight(scanner.nextLine());
-
-        System.out.print("Enter conservation status: ");
-        bird.setConservationStatus(scanner.nextLine());
-
-        System.out.print("Enter description: ");
-        bird.setDescription(scanner.nextLine());
-
-        System.out.print("Enter scientific name: ");
-        bird.setScientificName(scanner.nextLine());
-
-        System.out.print("Enter name: ");
-        bird.setName(scanner.nextLine());
-
+    public ResponseEntity<String> createBirdFromUserInput(@ModelAttribute Birds bird) {
         // Save the bird object to the database
         birdsService.createBird(bird);
 
         return new ResponseEntity<>("Bird created successfully", HttpStatus.CREATED);
     }
-
 }
 
