@@ -21,4 +21,9 @@ public class BirdsService {
     public Optional<Birds> singleBird(ObjectId id){
         return birdsRepository.findById(id);
     }
+
+    public void createBird(Birds bird){
+        birdsRepository.save(bird);
+    }
+
 }

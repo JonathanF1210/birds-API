@@ -18,8 +18,14 @@ public class Birds {
     @Id
     @JsonProperty("_id")
     private String _id;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("scientificName")
+    private String scientificName;
     @JsonProperty("images")
     private String images;
+    @JsonProperty("description")
+    private String description;
     @JsonProperty("breedingSeason")
     private String breedingSeason;
     @JsonProperty("diet")
@@ -44,12 +50,6 @@ public class Birds {
     private String weight;
     @JsonProperty("conservationStatus")
     private String conservationStatus;
-    @JsonProperty("description")
-    private String description;
-    @JsonProperty("scientificName")
-    private String scientificName;
-    @JsonProperty("name")
-    private String name;
 
     public static class _id {
         @JsonProperty("$oid")
