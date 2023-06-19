@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BirdsRepository extends MongoRepository<Birds, ObjectId> {
+    Birds findByName(String name);
 }
+
+
+

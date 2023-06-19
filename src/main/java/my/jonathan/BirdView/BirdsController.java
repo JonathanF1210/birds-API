@@ -1,5 +1,6 @@
 package my.jonathan.BirdView;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,10 +24,19 @@ public class BirdsController {
         return new ResponseEntity<List<Birds>>(birdsService.allBirds(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Birds>> getSingleMovie(@PathVariable ObjectId id) {
-        return
-                new ResponseEntity<Optional<Birds>>(birdsService.singleBird(id), HttpStatus.OK);
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Optional<Birds>> getSingleBirdById(@PathVariable ObjectId id) {
+        return new ResponseEntity<Optional<Birds>>(birdsService.singleBird(id), HttpStatus.OK);
+    }
+
+   @GetMapping("/name/{name}")
+    public ResponseEntity<Birds> getSingleBirdByName(@PathVariable ("name") String name){
+        Birds bird = birdsService.getBirdByName(name);
+        if (bird != null) {
+            return new ResponseEntity<>(bird, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/api/v1/newBird")
